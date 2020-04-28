@@ -60,13 +60,6 @@ class AgencyTestCase(unittest.TestCase):
         self.assertTrue(data['success'])
 
     def test_get_all_movies(self):
-        res = self.client().get('/movies/5/actors', headers = assistant_auth_header)
-        data = json.loads(res.data)
-        self.assertEqual(res.status_code, 404)
-        self.assertFalse(data['success'])
-        self.assertEqual(data['message'] , '404 Not Found: No Movies found')
-
-    def test_get_all_movies(self):
         res = self.client().get('/movies', headers = assistant_auth_header)
         data = json.loads(res.data)
         self.assertEqual(res.status_code, 200)
@@ -74,7 +67,7 @@ class AgencyTestCase(unittest.TestCase):
         self.assertTrue(data['success'])
 
     def test_get_all_movies_401(self):
-        res = self.client().get('/movies?page=1')
+        res = self.client().get('/movies')
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 401)
@@ -175,6 +168,14 @@ class AgencyTestCase(unittest.TestCase):
         self.assertEqual(res.status_code, 200)
         self.assertTrue(data['success'])
         self.assertTrue(len(data['Actors']) > 0)
+
+    def test_get_all_movies(self):
+        res = self.client().get('/actors/5/movies', headers = assistant_auth_header)
+        data = json.loads(res.data)
+        self.assertEqual(res.status_code, 404)
+        self.assertFalse(data['success'])
+        self.assertEqual(data['message'] , '404 Not Found: No Movies found')
+
 
     def test_get_all_actors_401(self):
         res = self.client().get('/actors')

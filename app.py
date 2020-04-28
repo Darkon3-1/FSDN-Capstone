@@ -57,15 +57,6 @@ def create_app(test_config=None):
         movie_raw = Movie.query.filter(Movie.id == movie_id).first()
         return return_json(movie_raw, 'Movies')
 
-    @app.route('/movies/<int:actor_id>/actors', methods=['GET'])
-    @requires_auth('read:movies')
-    def movies_get_actors(payload, actor_id):
-        '''
-            Gets all the movies with the actor in it
-        '''
-        movies_raw = Movie.query.filter(Movie.actor_id == actor_id)
-        return return_json(movies_raw, 'Movies')
-
     @app.route('/movies/<int:movie_id>', methods=['PATCH'])
     @requires_auth('update:movies')
     def movies_patch(payload, movie_id):
@@ -162,6 +153,16 @@ def create_app(test_config=None):
         '''
         actor_raw = Actor.query.filter(Actor.id == actor_id).first()
         return return_json(actor_raw, 'Actors')
+
+    @app.route('/actors/<int:actor_id>/movies', methods=['GET'])
+    @requires_auth('read:movies')
+    def movies_get_actors(payload, actor_id):
+        '''
+            Gets all the movies with the actor in it
+        '''
+        movies_raw = Movie.query.filter(Movie.actor_id == actor_id)
+        return return_json(movies_raw, 'Movies')
+
 
     @app.route('/actors/<int:actor_id>', methods=['PATCH'])
     @requires_auth('update:actors')

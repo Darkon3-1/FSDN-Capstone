@@ -89,7 +89,6 @@ Click on a link to directly get to the ressource.
 1. Movies
     -  [GET /movies](####GET-'/movies')
     -  [GET /movies/movie_id](####GET-'/movies/movie_id')
-    -  [GET /movies/actor_id/actors](####GET-'/movies/actor_id/actors')
     -  [POST /movies](####POST-'/movies')
     -  [DELETE /movies/movie_id](####DELETE-'/movies/movie_id')
     -  [PATCH /movies/movie_id](####PATCH-'/movies/movie_id')
@@ -97,6 +96,7 @@ Click on a link to directly get to the ressource.
 2. Actors
     -  [GET /actors](####GET-'/actors')
     -  [GET /actors/actor_id](####GET-'/actors/actor_id')
+    -  [GET /movies/actor_id/actors](####GET-'/actors/actor_id/movies')
     -  [POST /actors](####POST-'/actors')
     -  [DELETE /actors/actor_id](####DELETE-'/actors/actor_id')
     -  [PATCH /actors/actor_id](####PATCH-'/actors/actor_id')
@@ -161,36 +161,6 @@ Click on a link to directly get to the ressource.
     "success": true
 }
 ```
-
-##### GET '/movies/actor_id/actors'
-- Gets all the movies with said actor
-- Request Arguments: actor_id
-- Returns: Same as GET /movies
-'''
-{
-    "Movies": [
-        {
-            "actor": {
-                "id": 3,
-                "name": "Katie"
-            },
-            "id": 2,
-            "release_date": "Sat, Apr 29 2017",
-            "title": "up up and away"
-        },
-        {
-            "actor": {
-                "id": 3,
-                "name": "Katie"
-            },
-            "id": 3,
-            "release_date": "Sat, Apr 29 2017",
-            "title": "finding katie"
-        }
-    ],
-    "success": true
-}
-'''
 
 ##### POST '/movies'
 - Adds a movie
@@ -275,6 +245,36 @@ Click on a link to directly get to the ressource.
         "id": 2,
         "name": "Chris"
     },
+    "success": true
+}
+'''
+
+##### GET '/actors/actor_id/movies'
+- Gets all the movies with said actor
+- Request Arguments: actor_id
+- Returns: Same as GET /movies
+'''
+{
+    "Movies": [
+        {
+            "actor": {
+                "id": 3,
+                "name": "Katie"
+            },
+            "id": 2,
+            "release_date": "Sat, Apr 29 2017",
+            "title": "up up and away"
+        },
+        {
+            "actor": {
+                "id": 3,
+                "name": "Katie"
+            },
+            "id": 3,
+            "release_date": "Sat, Apr 29 2017",
+            "title": "finding katie"
+        }
+    ],
     "success": true
 }
 '''
