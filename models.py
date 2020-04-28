@@ -5,11 +5,12 @@ import json
 from datetime import datetime, timedelta
 
 # If run locally, uncomment the following below
-database_filename = "database.db"
-project_dir = os.path.dirname(os.path.abspath(__file__))
-database_path = "sqlite:///{}".format(os.path.join(project_dir, database_filename))
+#database_filename = "database.db"
+#project_dir = os.path.dirname(os.path.abspath(__file__))
+#database_path = "sqlite:///{}".format(os.path.join(project_dir, database_filename))
 
 # For running on Prod
+
 #database_path = os.environ.get('DATABASE_URL', "postgres://{}:{}@{}/{}".format(database_setup["user_name"], database_setup["password"], database_setup["port"], database_setup["database_name_test"]))
 
 db = SQLAlchemy()
@@ -19,7 +20,7 @@ def setup_db(app):
     setup_db(app)
         binds a flask application and a SQLAlchemy service
     '''
-    app.config["SQLALCHEMY_DATABASE_URI"] = database_path
+    app.config["SQLALCHEMY_DATABASE_URI"] = os.environ['DATABASE_URL']
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
     db.app = app
     db.init_app(app)
