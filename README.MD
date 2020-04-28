@@ -1,14 +1,16 @@
 # FSND: Capstone Project
 ## Content
-1.  [Motivation](#motivation)
+1.  [Motivation](#motivations)
 
-2.  [Start Project locally](#start-locally)
+2.  [Start Project locally](#start-project-locally)
 
-3.  [API Documentation](#api)
+3.  [Base URL](#base-url)
 
-4.  [Authentification](#authentification)
+4.  [API Documentation](#endpoints)
 
-## Motivations & Covered Topics
+5.  [Authentification](#authentification)
+
+## Motivations
 
 This is the last project of the `Udacity-Full-Stack-Nanodegree` Course. For which I wanted to make sure my skills were up to date.
 
@@ -60,6 +62,10 @@ With the project being locally, we can setup a sqllite database
 ```
 $ python app.py
 ```
+This is the same process for running tests. After all this is done, and you have switched to a SQLlite setup, run the following command
+```
+$ pytest test_app.py
+```
 
 ## API Documentation
 In this next section, you will find all the endpoints for the project and requirements
@@ -69,8 +75,6 @@ In this next section, you will find all the endpoints for the project and requir
 **_https://udacity-capstone-dlee.herokuapp.com/_**
 
 ### Authentification
-
-
 
 Please see [API Authentification](#authentification-bearer)
 
@@ -347,6 +351,7 @@ They are 3 Roles with distinct permission sets:
 In your API Calls, add them as Header, with `Authorization` as key and the `Bearer token` as value. Don´t forget to also
 prepend `Bearer` to the token (seperated by space).
 
+## Authentification Bearer
 For example: (Bearer token for `Executive Producer`)
 ```
 {
