@@ -10,7 +10,6 @@ from datetime import datetime, timedelta
 #database_path = "sqlite:///{}".format(os.path.join(project_dir, database_filename))
 
 # For running on Prod
-
 database_path = os.environ['DATABASE_URL']
 
 db = SQLAlchemy()
