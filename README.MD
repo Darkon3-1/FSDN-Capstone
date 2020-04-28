@@ -62,6 +62,10 @@ With the project being locally, we can setup a sqllite database
 ```
 $ python app.py
 ```
+This is the same process for running tests. After all this is done, and you have switched to a SQLlite setup, run the following command
+```
+$ pytest test_app.py
+```
 
 ## API Documentation
 In this next section, you will find all the endpoints for the project and requirements
