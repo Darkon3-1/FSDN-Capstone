@@ -1,10 +1,10 @@
 import os
 from flask import Flask, request, abort, jsonify
-from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
 from models import db_drop_and_create_all, setup_db, Actor, Movie
 from auth import AuthError, requires_auth
 from datetime import datetime
+
 
 def create_app(test_config=None):
     # create and configure the app
@@ -27,9 +27,12 @@ def create_app(test_config=None):
         try:
             items = [items.format() for items in db_object]
         except Exception:
-            items = db_object.format()
+            try:
+                items = db_object.format()
+            except Exception:
+                abort(404, f"No {table_type} found")
         if len(items) == 0:
-            abort(404)
+            abort(404, f"No {table_type} found")
         data = {
             "success": True,
             table_type: items
@@ -89,7 +92,7 @@ def create_app(test_config=None):
                 movie.actor_id = actor_id
 
             movie.update()
-        except Exception as e:
+        except Exception:
             abort(404, "Movie not found")
         else:
             return jsonify({
@@ -132,7 +135,7 @@ def create_app(test_config=None):
             Deletes a movie
         '''
         try:
-            movie = Movie.query.find(Movie.id == movie_id).first()
+            movie = Movie.query.filter(Movie.id == movie_id).first()
             movie.delete()
         except Exception:
             abort(404, 'Movie not found')
@@ -228,7 +231,7 @@ def create_app(test_config=None):
             deletes an actor
         '''
         try:
-            actor = Actor.query.find(Actor.id == actor_id).first()
+            actor = Actor.query.filter(Actor.id == actor_id).first()
             actor.delete()
         except Exception:
             abort(404, 'Actor not found')

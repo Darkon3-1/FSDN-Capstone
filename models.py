@@ -5,9 +5,9 @@ import json
 from datetime import datetime, timedelta
 
 # If run locally, uncomment the following below
-#database_filename = "database.db"
-#project_dir = os.path.dirname(os.path.abspath(__file__))
-#database_path = "sqlite:///{}".format(os.path.join(project_dir, database_filename))
+# database_filename = "database.db"
+# project_dir = os.path.dirname(os.path.abspath(__file__))
+# database_path = "sqlite:///{}".format(os.path.join(project_dir, database_filename))
 
 # For running on Prod
 database_path = os.environ['DATABASE_URL']
