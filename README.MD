@@ -87,19 +87,19 @@ Click on a link to directly get to the ressource.
 
 
 1. Movies
-    -  [GET /movies](####GET-'/movies')
-    -  [GET /movies/movie_id](####GET-'/movies/movie_id')
-    -  [GET /movies/actor_id/actors](####GET-'/movies/actor_id/actors')
-    -  [POST /movies](####POST-'/movies')
-    -  [DELETE /movies/movie_id](####DELETE-'/movies/movie_id')
-    -  [PATCH /movies/movie_id](####PATCH-'/movies/movie_id')
+    -  [GET /movies](#get-'/movies')
+    -  [GET /movies/movie_id](#get-'/movies/movie_id')
+    -  [GET /movies/actor_id/actors](#get-'/movies/actor_id/actors')
+    -  [POST /movies](#post-'/movies')
+    -  [DELETE /movies/movie_id](#delete-'/movies/movie_id')
+    -  [PATCH /movies/movie_id](#patch-'/movies/movie_id')
 
 2. Actors
-    -  [GET /actors](####GET-'/actors')
-    -  [GET /actors/actor_id](####GET-'/actors/actor_id')
-    -  [POST /actors](####POST-'/actors')
-    -  [DELETE /actors/actor_id](####DELETE-'/actors/actor_id')
-    -  [PATCH /actors/actor_id](####PATCH-'/actors/actor_id')
+    -  [GET /actors](#get-'/actors')
+    -  [GET /actors/actor_id](#get-'/actors/actor_id')
+    -  [POST /actors](#post-'/actors')
+    -  [DELETE /actors/actor_id](#delete-'/actors/actor_id')
+    -  [PATCH /actors/actor_id](#patch-'/actors/actor_id')
 
 ##### GET '/movies'
 - Fetches an array of movies that are in the DB
