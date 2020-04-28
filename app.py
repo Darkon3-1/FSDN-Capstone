@@ -6,6 +6,7 @@ from models import db_drop_and_create_all, setup_db, Actor, Movie
 from auth import AuthError, requires_auth
 from datetime import datetime
 
+
 def create_app(test_config=None):
     # create and configure the app
     app = Flask(__name__)
@@ -16,15 +17,17 @@ def create_app(test_config=None):
     # CORS Headers
     @app.after_request
     def after_request(response):
-        response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization,true')
-        response.headers.add('Access-Control-Allow-Methods', 'GET,PATCH,POST,DELETE,OPTIONS')
+        response.headers.add('Access-Control-Allow-Headers',
+                             'Content-Type,Authorization,true')
+        response.headers.add('Access-Control-Allow-Methods',
+                             'GET,PATCH,POST,DELETE,OPTIONS')
         return response
 
     # Helper functions
     def return_json(db_object, table_type):
         try:
             items = [items.format() for items in db_object]
-        except:
+        except Exception:
             items = db_object.format()
         if len(items) == 0:
             abort(404)
@@ -34,9 +37,6 @@ def create_app(test_config=None):
         }
         return jsonify(data), 200
 
-
-    #TODO
-    #Movies enpoints
     @app.route('/movies', methods=['GET'])
     @requires_auth('read:movies')
     def movies_get_all(payload):
@@ -45,7 +45,6 @@ def create_app(test_config=None):
         '''
         movies_raw = Movie.query.all()
         return return_json(movies_raw, 'Movies')
-
 
     @app.route('/movies/<int:movie_id>', methods=['GET'])
     @requires_auth('read:movies')
@@ -65,7 +64,6 @@ def create_app(test_config=None):
         movies_raw = Movie.query.filter(Movie.actor_id == actor_id)
         return return_json(movies_raw, 'Movies')
 
-
     @app.route('/movies/<int:movie_id>', methods=['PATCH'])
     @requires_auth('update:movies')
     def movies_patch(payload, movie_id):
@@ -82,7 +80,8 @@ def create_app(test_config=None):
             actor_id = data.get('actor_id', None)
 
             if release_date:
-                movie.release_date = datetime.strptime(release_date, '%a, %b %d %Y')
+                date_f = '%a, %b %d %Y'
+                movie.release_date = datetime.strptime(release_date, date_f)
 
             if title:
                 movie.title = title
@@ -113,9 +112,9 @@ def create_app(test_config=None):
             actor_id = data['actor_id']
 
             new_movie = Movie(
-                title = title,
-                release_date = datetime.strptime(release_date, '%a, %b %d %Y'),
-                actor_id = actor_id
+                title=title,
+                release_date=datetime.strptime(release_date, '%a, %b %d %Y'),
+                actor_id=actor_id
             )
 
             new_movie.insert()
@@ -144,10 +143,6 @@ def create_app(test_config=None):
                     'delete': movie_id
                 })
 
-
-
-    #TODO
-    #Actors endpoints
     @app.route('/actors', methods=['GET'])
     @requires_auth('read:actors')
     def actors_get_all(payload):
@@ -213,9 +208,9 @@ def create_app(test_config=None):
             name = data['name']
 
             new_actor = Actor(
-                age = age,
-                gender = gender,
-                name = name
+                age=age,
+                gender=gender,
+                name=name
             )
 
             new_actor.insert()
@@ -244,7 +239,6 @@ def create_app(test_config=None):
                     'delete': actor_id
                 })
 
-
     @app.errorhandler(422)
     def unprocessable(error):
         return jsonify({
@@ -253,7 +247,6 @@ def create_app(test_config=None):
                         "message": str(error)
                         }), 422
 
-
     @app.errorhandler(404)
     def unprocessable(error):
         return jsonify({
@@ -261,7 +254,6 @@ def create_app(test_config=None):
                         "error": 404,
                         "message": str(error)
                         }), 404
-
 
     @app.errorhandler(AuthError)
     def authentification_failed(AuthError):
@@ -272,6 +264,7 @@ def create_app(test_config=None):
                 }), 401
 
     return app
+
 
 app = create_app()
 
